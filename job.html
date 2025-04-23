@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Board</title>
+    <link rel="stylesheet" href="job.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Job Board</h1>
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="#">Post Job</a></li>
+                <li><a href="http://localhost:5500/login.html">Login Page</a></li>
+                <li><a href="http://localhost:5500/admit.html">Admin Panel</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <section class="filters">
+        <h2>Job Search</h2>
+        <nav>
+        <form action="" method="get">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+                <option value="all">All</option>
+                <option value="software">Software</option>
+                <option value="marketing">Marketing</option>
+                <option value="design">Design</option>
+            </select>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Location">
+
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+    </section>
+
+    <section class="job-listings">
+        <h2><center><u>Available Job Listings:</u></center></h2>
+            <div class="job-card">
+            <h3>Software Engineer</h3>
+            <p>Location: Telangana</p>
+            <p>Category: Software</p>
+            <a href="http://localhost:5500/op.html">Apply Now</a>
+        </div>
+        <div class="job-card">
+            <h3>Marketing Manager</h3>
+            <p>Location: Andhra Pradesh</p>
+            <p>Category: Marketing</p>
+            <a href="http://localhost:5500/op.html">Apply Now</a>
+        </div>
+        <div class="job-card">
+            <h3>Frontend Web Developer</h3>
+            <p>Location: Kerala</p>
+            <p>Category: Websites Design</p>
+            <a href="http://localhost:5500/op.html">Apply Now</a>
+        </div>
+        <div class="job-card">
+            <h3>Backend Web Developer</h3>
+            <p>Location: Karnataka</p>
+            <p>Category: Websites Design</p>
+            <a href="http://localhost:5500/op.html">Apply Now</a>
+        </div>
+        <div class="job-card">
+            <h3>AI & Machine Learning</h3>
+            <p>Location: Tamil Nadu</p>
+            <p>Category: GenAl and ML Tools</p>
+            <a href="http://localhost:5500/op.html">Apply Now</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Job Board. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+  }
+  
+  header {
+    background-color: #156abf;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+  }
+  
+  li {
+    display: inline;
+    margin: 0 15px;
+  }
+  
+  ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  section.filters {
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+  }
+  
+  section.filters form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  section.filters select,
+  section.filters input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  section.filters button {
+    padding: 8px 16px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .job-listings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px 40px;
+    justify-content: center;
+  }
+  
+  .job-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+  }
+  
+  .job-card h3 {
+    margin-top: 0;
+  }
+  
+  .job-card a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0f5398;
+    color: white;
+  }
+  .nav {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+
+  

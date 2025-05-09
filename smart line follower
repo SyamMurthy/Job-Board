@@ -1,0 +1,148 @@
+// === Pin Definitions ===
+
+// Motor A
+const int ENA = 5;  // PWM pin for Motor A
+const int IN1 = 8;  // IN1 pin for Motor A
+const int IN2 = 9;  // IN2 pin for Motor A
+#define s 100      // base speed
+#define t 130      // turning speed
+
+// Motor B
+const int ENB = 6;  // PWM pin for Motor B
+const int IN3 = 10; // IN3 pin for Motor B
+const int IN4 = 11; // IN4 pin for Motor B
+
+// IR Sensors
+const int IRSensorLeft = 2;  // Left IR sensor
+const int IRSensorRight = 3; // Right IR sensor
+
+// Ultrasonic Sensor (HC-SR04)
+const int trigPin = 12;
+const int echoPin = 13;
+#define distanceThreshold 20  // Obstacle detection distance in cm
+
+// === Function Prototypes ===
+long getDistance();
+void moveForward();
+void turnRight();
+void turnLeft();
+void stopMotors();
+
+void setup() {
+  // Motor pins as outputs
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+
+  // Sensor pins
+  pinMode(IRSensorLeft, INPUT);
+  pinMode(IRSensorRight, INPUT);
+
+  // Ultrasonic pins
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  // Serial monitor for debugging
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Get distance from ultrasonic sensor
+  long distance = getDistance();
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  // If obstacle detected, stop motors and skip movement
+  if (distance < distanceThreshold) {
+    stopMotors();
+    return;
+  }
+
+  // Read IR sensor values
+  bool leftSensor = digitalRead(IRSensorLeft);
+  bool rightSensor = digitalRead(IRSensorRight);
+
+  Serial.print("Left Sensor: ");
+  Serial.print(leftSensor);
+  Serial.print(" | Right Sensor: ");
+  Serial.println(rightSensor);
+
+  // Movement decisions based on IR sensors
+  if (leftSensor == LOW && rightSensor == LOW) {
+    moveForward();
+  }
+  else if (leftSensor == LOW && rightSensor == HIGH) {
+    turnRight();
+  }
+  else if (leftSensor == HIGH && rightSensor == LOW) {
+    turnLeft();
+  }
+  else {
+    stopMotors();
+  }
+
+  delay(100); // Short delay for stability
+}
+
+// === Function Definitions ===
+
+// Get distance from ultrasonic sensor
+long getDistance() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  long duration = pulseIn(echoPin, HIGH);
+  long distance = duration * 0.034 / 2;  // Convert duration to cm
+  return distance;
+}
+
+// Move both motors forward
+void moveForward() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, s);
+
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, s);
+}
+
+// Turn right by reversing left motor
+void turnRight() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, t);
+
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, t);
+}
+
+// Turn left by reversing right motor
+void turnLeft() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, t);
+
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, t);
+}
+
+// Stop both motors
+void stopMotors() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, 0);
+
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENB, 0);
+}
